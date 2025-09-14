@@ -73,7 +73,7 @@ export function HeroCarousel() {
 
   return (
     <section className="ps-4 sm:ps-6 lg:ps-8 py-8">
-      <div className=" lg:ps-8">
+      <div >
         <div className="relative">
           <div className="flex gap-6 overflow-hidden">
             {carouselItems.map((item, index) => {
