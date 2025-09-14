@@ -73,7 +73,7 @@ export function HeroCarousel() {
 
   return (
     <section className="ps-4 sm:ps-6 lg:ps-8 py-8">
-      <div className="ps-4 sm:ps-6 lg:ps-8">
+      <div className=" lg:ps-8">
         <div className="relative">
           <div className="flex gap-6 overflow-hidden">
             {carouselItems.map((item, index) => {
@@ -111,12 +111,12 @@ export function HeroCarousel() {
                           {item.subtitle}
                         </p>
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                          <p className="text-[12px] md:text-white/50 max-w-2xl text-accent-foreground w-md">
+                          <p className="text-[12px] text-white/50 lg:max-w-2xl dark:text-accent-foreground lg:w-md">
                             {item.description}
                           </p>
 
                           {isActive && (
-                            <button className="bg-white text-black px-6 py-2 rounded-full font-medium hover:bg-gray-100 transition whitespace-nowrap">
+                            <button className="bg-white text-black lg:px-6 lg:py-2 py-1 rounded-full font-medium hover:bg-gray-100 transition whitespace-nowrap">
                               Learn More
                             </button>
                           )}
@@ -129,7 +129,7 @@ export function HeroCarousel() {
             })}
           </div>
 
-          <div className="absolute mt-3 md:right-14 right-4  flex gap-2">
+          <div className="absolute mt-3 md:right-9 right-4  flex gap-2">
             <Button
               variant="ghost"
               size="icon"

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ImageIcon, Video, Zap, Wand2, Edit3, Mic, RotateCcw, GraduationCap } from "lucide-react"
+import { ImageIcon, Video, Zap, Wand2, Edit3, Mic, RotateCcw, GraduationCap, ChevronDown } from "lucide-react"
 
 const features = [
   {
@@ -69,9 +69,10 @@ export function FeatureGrid() {
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold text-foreground">Generate</h2>
           <Button
-            variant="ghost"
-            className="text-accent hover:text-accent-foreground"
+            variant="link"
+            className="text-blue-600 hover:text-accent-foreground cursor-pointer"
           >
+            <ChevronDown className="w-3 h-3 text-blue-600" />
             Show all
           </Button>
         </div>

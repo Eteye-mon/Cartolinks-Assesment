@@ -6,17 +6,21 @@ export function Footer() {
       <div className="max-w-full  px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-           <Image src="/logobg.png" width={40} height={40} alt="logo"/>
-            <span className="text-white font-semibold text-lg">Krea AI</span>
+            <Image src="/logobg.png" width={40} height={40} alt="logo" className="h-4 w-4 lg:h-8 lg:w-8"/>
+            <span className="text-white font-semibold text-[9px] lg:text-[20px]">
+              Krea AI
+            </span>
           </div>
 
           <div className="flex items-center gap-3 text-white">
-            <span className="text-gray-300">curated by</span>
+            <span className="text-gray-300 lg:text-[20px] text-[9px]">
+              curated by
+            </span>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8  flex items-center justify-center">
-               <MobbinLogo />
+              <div className="lg:w-8 lg:h-8 h-4 w-4 flex items-center justify-center">
+                <MobbinLogo />
               </div>
-              <span className="font-semibold text-lg">Mobbin</span>
+              <span className="font-semibold lg:text-lg text-[9px]">Mobbin</span>
             </div>
           </div>
         </div>
