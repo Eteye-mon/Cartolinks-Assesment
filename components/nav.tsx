@@ -4,12 +4,29 @@ import Link from "next/link";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Moon, Sun, Menu } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Menu,
+  LogOut,
+  Settings,
+  User,
+  ChevronDown,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import {
   Home,
@@ -24,16 +41,15 @@ import {
 export function Navigation() {
   const [activeItem, setActiveItem] = useState("home");
   const { theme, setTheme } = useTheme();
-const [scrolled, setScrolled] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-useEffect(() => {
-  const handleScroll = () => {
-    setScrolled(window.scrollY > 10);
-  };
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
-  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { id: "home", href: "/", icon: Home },
@@ -53,9 +69,36 @@ useEffect(() => {
     >
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center  gap-2">
             <img src="/logo.png" alt="logo" className="w-8 h-8" />
-            <span className="text-sm font-medium">benevolentambassador</span>
+            <div className="relative w-8 h-8">
+              <div
+                className="relative m-auto w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 via-indigo-400 to-blue-400 shadow-[0_6px_24px_rgba(99,102,241,0.18)]"
+                role="img"
+                aria-label="gradient blob"
+              ></div>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="focus:outline-hidden rounded-full flex items-end cursor-pointer">
+                <span className="text-sm font-medium">
+                  benevolentambassador
+                </span>
+                <ChevronDown className="h-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <User className="h-4 w-4" /> Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Settings className="h-4 w-4" /> Settings
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-destructive">
+                  <LogOut className="h-4 w-4" /> Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <div className="hidden md:flex items-center space-x-1 bg-[#f6f6f6] rounded-lg p-2">
             {navItems.map((item) => {
@@ -85,7 +128,7 @@ useEffect(() => {
             })}
           </div>
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center gap-1 bg-[#f6f6f6] dark: text-sm text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors">
+            <div className="flex items-center gap-1 bg-[#f6f6f6] dark: text-sm text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-xl hover:bg-gray-50 transition-colors">
               <Image
                 color="#000000"
                 variant="Bold"
@@ -93,7 +136,7 @@ useEffect(() => {
               />
               Gallery
             </div>
-            <div className="flex items-center gap-1 text-sm bg-[#f6f6f6] dark: text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors">
+            <div className="flex items-center gap-1 text-sm bg-[#f6f6f6] dark: text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 hover:bg-gray-50 transition-colors rounded-xl">
               <Headphone
                 color="#000000"
                 variant="Bold"
@@ -106,7 +149,7 @@ useEffect(() => {
               size="icon"
               className="bg-[#f6f6f6] p-0 hover:bg-gray-100 transition-colors"
             >
-              <div className="text-sm bg-[#f6f6f6] dark: text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2.5 rounded-md hover:bg-gray-50 transition-colors">
+              <div className="text-sm bg-[#f6f6f6] dark: text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2.5 rounded-xl hover:bg-gray-50 transition-colors">
                 <Notification
                   color="#000000"
                   variant="Bold"
@@ -118,7 +161,7 @@ useEffect(() => {
               variant="outline"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="cursor-pointer"
+              className="cursor-pointer rounded-xl bg-[#f6f6f6] dark: text-gray-600"
             >
               {theme === "dark" ? (
                 <Sun className="h-[1.2rem] w-[1.2rem]" />
@@ -126,13 +169,13 @@ useEffect(() => {
                 <Moon className="h-[1.2rem] w-[1.2rem]" />
               )}
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="bg-[#f6f6f6] hover:bg-gray-100"
-            >
-              <Notification className="w-4 h-4" color="#000" variant="Bold" />
-            </Button>
+            <div className="relative w-8 h-8">
+              <div
+                className="relative m-auto w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 via-indigo-400 to-blue-400 shadow-[0_6px_24px_rgba(99,102,241,0.18)]"
+                role="img"
+                aria-label="gradient blob"
+              ></div>
+            </div>
           </div>
 
           {/* Mobile Menu */}
