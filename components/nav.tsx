@@ -169,7 +169,7 @@ export function Navigation() {
                       >
                         <Link
                           href={item.href}
-                          className="flex items-center gap-2 text-gray-700 hover:text-black"
+                          className="flex items-center gap-2 text-gray-700 dark:text-white hover:text-black"
                           onClick={() => setActiveItem(item.id)}
                         >
                           <Icon
@@ -203,7 +203,7 @@ export function Navigation() {
                     variant="outline"
                     size="sm"
                     onClick={toggleTheme}
-                    className="mt-4"
+                    className="mt-4 border-2"
                   >
                     {theme === "light" ? "Switch to Dark" : "Switch to Light"}
                   </Button>

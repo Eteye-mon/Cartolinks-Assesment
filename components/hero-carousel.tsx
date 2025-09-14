@@ -99,7 +99,7 @@ export function HeroCarousel() {
                 >
                   <div className="absolute inset-0 bg-black/60" />
                   <div className="relative w-full max-w-6xl h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
-                    <div className="absolute inset-0 flex flex-col justify-between p-8 md:p-12 text-white">
+                    <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-12 text-white">
                       <p className="uppercase text-xs md:text-sm tracking-widest font-medium opacity-80">
                         {item.badge}
                       </p>
