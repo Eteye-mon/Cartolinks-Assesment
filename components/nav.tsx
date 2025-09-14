@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -22,18 +23,17 @@ import {
 
 export function Navigation() {
   const [activeItem, setActiveItem] = useState("home");
-  const [theme, setTheme] = useState("light");
+  const { theme, setTheme } = useTheme();
+const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: light)");
-    const systemTheme = mediaQuery.matches ? "dark" : "light";
-    setTheme(systemTheme);
-  }, []);
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-    document.documentElement.classList.toggle("dark");
+useEffect(() => {
+  const handleScroll = () => {
+    setScrolled(window.scrollY > 10);
   };
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, []);
+  
 
   const navItems = [
     { id: "home", href: "/", icon: Home },
@@ -44,7 +44,13 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-sm border-b border-gray-200/50">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-sm border-b border-gray-200/50 ${
+        scrolled
+          ? "bg-white/20 dark:bg-black/20 backdrop-blur-xl border border-white/30 dark:border-gray-800/50 rounded-2xl shadow-lg scale-95 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl px-4 py-2 transition-opacity duration-500"
+          : "bg-transparent "
+      }`}
+    >
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center space-x-2">
@@ -57,23 +63,23 @@ export function Navigation() {
               const isActive = activeItem === item.id;
               return (
                 <Link href={item.href} key={item.id}>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setActiveItem(item.id)}
-                    className={`h-8 w-10 px-3 transition-all ${
-                      isActive
-                        ? "bg-white shadow-sm text-gray-900"
-                        : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
-                    }`}
-                  >
-                    <Tooltip>
-                      <TooltipTrigger asChild>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setActiveItem(item.id)}
+                        className={`h-8 w-10 px-3 transition-all cursor-pointer ${
+                          isActive
+                            ? "bg-white shadow-sm text-gray-900"
+                            : "text-gray-500 hover:text-gray-700 hover:bg-white/50"
+                        }`}
+                      >
                         <Icon className="w-4 h-4" color="#000" variant="Bold" />
-                      </TooltipTrigger>
-                      <TooltipContent>{item.id}</TooltipContent>
-                    </Tooltip>
-                  </Button>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>{item.id}</TooltipContent>
+                  </Tooltip>
                 </Link>
               );
             })}
@@ -111,10 +117,10 @@ export function Navigation() {
             <Button
               variant="outline"
               size="icon"
-              onClick={toggleTheme}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="cursor-pointer"
             >
-              {theme === "light" ? (
+              {theme === "dark" ? (
                 <Sun className="h-[1.2rem] w-[1.2rem]" />
               ) : (
                 <Moon className="h-[1.2rem] w-[1.2rem]" />
@@ -174,7 +180,7 @@ export function Navigation() {
                         >
                           <Icon
                             className="w-5 h-5"
-                            color="#000"
+                            color={theme === "dark" ? "#ffffff" : "#000000"}
                             variant="Bold"
                           />
                           {item.id}
@@ -182,7 +188,7 @@ export function Navigation() {
                       </motion.div>
                     );
                   })}
-                  <div className="flex items-center gap-1 bg-[#f6f6f6] dark: text-sm text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center gap-1 bg-[#f6f6f6] dark: text-sm text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors w-1/2">
                     <Image
                       color="#000000"
                       variant="Bold"
@@ -190,7 +196,7 @@ export function Navigation() {
                     />
                     Gallery
                   </div>
-                  <div className="flex items-center gap-1 text-sm bg-[#f6f6f6] dark: text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors">
+                  <div className="flex items-center gap-1 text-sm bg-[#f6f6f6] dark: text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors w-1/2">
                     <Headphone
                       color="#000000"
                       variant="Bold"
@@ -202,10 +208,12 @@ export function Navigation() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={toggleTheme}
+                    onClick={() =>
+                      setTheme(theme === "dark" ? "light" : "dark")
+                    }
                     className="mt-4 border-2"
                   >
-                    {theme === "light" ? "Switch to Dark" : "Switch to Light"}
+                    {theme === "dark" ? "Switch to Light" : "Switch to Dark"}
                   </Button>
                 </motion.div>
               </SheetContent>
