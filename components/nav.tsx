@@ -63,11 +63,11 @@ export function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 bg-background backdrop-blur-sm border-b border-gray-200/50 ${
         scrolled
-          ? "bg-white/20 dark:bg-black/20 backdrop-blur-xl border border-white/30 dark:border-gray-800/50 rounded-2xl shadow-lg scale-95 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl px-4 py-2 transition-opacity duration-500"
+          ? "bg-white/20 dark:bg-black/20 backdrop-blur-xl border border-white/30 dark:border-gray-800/50 rounded-2xl shadow-lg scale-95 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl lg:px-4 lg:py-2 transition-opacity duration-500"
           : "bg-transparent "
       }`}
     >
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto lg:px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           <div className="flex items-center  gap-2">
             <img src="/logo.png" alt="logo" className="w-8 h-8" />
@@ -100,7 +100,7 @@ export function Navigation() {
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-          <div className="hidden md:flex items-center space-x-1 bg-[#f6f6f6] rounded-lg p-2">
+          <div className="hidden lg:flex items-center space-x-1 bg-[#f6f6f6] rounded-lg p-2">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeItem === item.id;
@@ -127,7 +127,7 @@ export function Navigation() {
               );
             })}
           </div>
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center gap-1 bg-[#f6f6f6] dark: text-sm text-gray-600 cursor-pointer hover:text-gray-900 px-3 py-2 rounded-xl hover:bg-gray-50 transition-colors">
               <Image
                 color="#000000"
@@ -179,7 +179,7 @@ export function Navigation() {
           </div>
 
           {/* Mobile Menu */}
-          <div className="md:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <Button
               variant="ghost"
               size="icon"

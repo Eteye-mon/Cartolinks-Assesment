@@ -116,7 +116,7 @@ export function HeroCarousel() {
                           </p>
 
                           {isActive && (
-                            <button className="bg-white text-black lg:px-6 lg:py-2 py-1 rounded-full font-medium hover:bg-gray-100 transition whitespace-nowrap">
+                            <button className="bg-white text-black md:px-6 lg:py-2 py-1 rounded-full font-medium hover:bg-gray-100 transition whitespace-nowrap">
                               Learn More
                             </button>
                           )}
